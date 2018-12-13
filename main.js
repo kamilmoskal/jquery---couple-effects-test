@@ -38,6 +38,7 @@ $("#rozwin").on("click",function(){
 ///////////// ANIMATE ON SCROLL EFFECT
 const textscroll = $('.barbetween span');
 let scrollState = 'top';
+let scrollNavState = 'scrolled';
 
 $(window).scroll(function(){ 
 
@@ -50,6 +51,19 @@ $(window).scroll(function(){
     else if( ( scrollPos < textscroll.offset().top/5 ) && ( scrollState === 'scrolled' ) ) {
         $(textscroll).stop().animate({"left":"20%", "opacity":"0"}, 1000);
         scrollState = 'top';
+    }
+    
+    let navscroll = $("#nav");
+    let liInNav = $("#nav > ul > li")
+    if( ( scrollPos == 0) && ( scrollNavState === 'top' ) ) {
+        $(navscroll).stop().animate({"height":"70px"}, 500);
+        $(liInNav).stop().animate({"line-height":"70px","font-size":"14px"}, 500);
+        scrollNavState = 'scrolled';
+    }       
+    else if( ( scrollPos !== 0 ) && ( scrollNavState === 'scrolled' ) ) {
+        $(navscroll).stop().animate({"height":"50px"}, 500);
+        $(liInNav).stop().animate({"line-height":"50px","font-size":"13px"}, 500);
+        scrollNavState = 'top';
     }
 
 });
